@@ -1,54 +1,49 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <div class="container row">
-        <card v-for="(c, i) in cards"
-              class="4"
-              :card="c"
-              :index="i"
-              @remove="removeCard"></card>
-      </div>
-    </div>
-  </header>
+    <div>
+        <div class="container">
+            <div class="row row-cols-2 row-cols-md-3 g-1">
+                <div v-for="p in posts"
+                    class="col">
+                    <div class="card border-dark h-100">
+                        <div class="card-header">Article:</div>
+                        <div class="card-body text-dark">
+                            <img width="200" :src="'/src/assets/post-images/' + p.picture" class="card-img-top" alt="Post image">
 
-  <div>
-    <h3>home page</h3>
-  </div>
+                            <h5 class="card-title">
+                                <RouterLink :to="`/post/${p.id}`">{{
+                                    p.title
+                                }}</RouterLink>
+                            </h5>
+                            <p class="card-text">{{ p.text }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Posted: {{ p.datePosted }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
+
 <script>
-import card from '../components/card.vue';
+import { getAll } from '@/data/posts.js';
+
 export default {
   name: 'homeView',
   components: {
-    card
+    
   },
 
   data() {
     return {
-      cards: [
-        {
-          title: 'naslov 1',
-          text: 'texs,text,text',
-        },
-        {
-          title: 'naslov 2',
-          text: 'texs,text,text',
-        },
-        {
-          title: 'naslov 3',
-          text: 'texs,text,text',
-        }
-      ]
+     
+      posts: getAll()
     }
   },
 
-  methods: {
-    removeCard(index) {
-      this.cards.splice(index, 1)
-    }
-
-  }
+  
 }
 
 </script>

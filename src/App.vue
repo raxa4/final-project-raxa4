@@ -1,8 +1,8 @@
 
 
 <template>
-<nav>
-    <<nav class="navbar navbar-expand navbar-dark bg-dark">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -16,11 +16,15 @@
                       class="nav-link">
             Go to About
           </RouterLink>
+          <RouterLink to="/card"
+                      class="nav-link">
+            Go to Card
+          </RouterLink>
         </li>
       </ul>
     </div>
   </nav>
-  </nav>
+
 
   <RouterView class="container"/>
 </template>

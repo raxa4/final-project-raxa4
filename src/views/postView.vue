@@ -1,25 +1,33 @@
 <template>
   <div>
-<h1> {{ post.title }}</h1>
-<article>{{ post.text }}</article>
+<<img class="w-100" :src="'/src/assets/post-images/' + post.picture" alt="Post image">
+        <h1>{{ post.title }}</h1>
+        <p>Posted: {{ post.datePosted }}</p>
+        <article>{{ post.text }}</article>
 
 
   </div>
 </template>
 
 <script>
-import post_data from '../data/posts.js'
+import { getPost } from '@/data/posts';
 export default {
 name : 'postView',
 data (){
     return{
-      post : post_data (0)
+      post : {}
     }
 },
 mounted() {
-console.log (post_data)
+this.getPost()
 },
-
+methods: {
+        getPost() {
+            try {
+                this.post = getPost(this.$route.params.id);
+            } catch(err) {
+                this.$router.push('/not-found');}
+            },
 }
-
+}
 </script>
