@@ -1,4 +1,4 @@
-let posts = [
+const posts = [
     {
         "id": "1af99896-5985-49dd-b2c3-299c9a99092b",
         "picture": "img-01.jpg",
@@ -98,15 +98,22 @@ let posts = [
         "datePosted": "Fri Jun 10 2016 06:11:55 GMT+0200 (Central European Summer Time)"
     }
 ];
+
 export const post_data = posts;
 
 export function getPost(id) {
-    let matches = posts.fliter((post) => post.id === id)
-    if (matches === 0) {
+    console.log('get posts is called!');
+    let matches = posts.filter((post) => post.id === id)
+
+    console.log(matches);
+
+    if (matches.length === 0) {
         throw new Error('nema nista')
     }
-    return metches[0]
+
+    return matches[0]
 }
+
 export function getAll() {
 
     return structuredClone(posts).map((p) => {
