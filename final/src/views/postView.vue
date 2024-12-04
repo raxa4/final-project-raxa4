@@ -1,7 +1,7 @@
 <template>
   <div>
     <img class="w-100"
-         :src="'/src/assets/post-images/' + post.picture"
+         :src="$api + post.picture"
          alt="Post image">
     <h1>{{ post.title }}</h1>
     <p>Posted: {{ post.datePosted }}</p>
@@ -12,7 +12,9 @@
 </template>
 
 <script>
-import { getPost } from '@/data/posts';
+import axios from 'axios';
+
+
 
 export default {
   name: 'postView',
@@ -27,14 +29,18 @@ export default {
   },
   methods: {
     getPost() {
-      try {
+     
         console.log('getting by id', this.$route.params.id)
-        this.post = getPost(this.$route.params.id);
-      } catch (err) {
-        console.error(err);
-        this.$router.push('/not-found');
+        axios.get(this.$api +'/post' + this.$route.params.id)
+        .than(res =>{
+          this.post=this.data
+        }).catch (err =>{
+     
+        
+        this.$router.push('/not-found')
+        })
       }
     },
   }
-}
+
 </script>

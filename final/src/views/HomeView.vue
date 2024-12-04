@@ -6,7 +6,7 @@
                 <div class="card-header">Article:</div>
                 <div class="card-body text-dark">
                     <img width="200"
-                         :src="'/src/assets/post-images/' + p.picture"
+                         :src="'$api /src/assets/post-images/' + p.picture"
                          class="card-img-top"
                          alt="Post image">
 
@@ -27,7 +27,9 @@
 
 
 <script>
-import { getAll } from '@/data/posts.js';
+import axios from 'axios';
+
+//import { getAll } from '@/data/posts.js';
 
 export default {
     name: 'homeView',
@@ -38,10 +40,19 @@ export default {
     data() {
         return {
 
-            posts: getAll()
+            posts:[]
         }
     },
+mounted (){
+axios.get ('${this.$api}/post').then ((res) => {
+this.post=this.data
 
+}).catch((e) => {
+    console.error (e)
+}
+)
+
+},
 
 }
 
