@@ -6,7 +6,7 @@
                 <div class="card-header">Article:</div>
                 <div class="card-body text-dark">
                     <img width="200"
-                         :src="'$api /src/assets/post-images/' + p.picture"
+                         :src="'$api/src/assets/post-images/' + p.picture"
                          class="card-img-top"
                          alt="Post image">
 
@@ -39,21 +39,18 @@ export default {
 
     data() {
         return {
-
-            posts:[]
+            posts: []
         }
     },
-mounted (){
-axios.get ('${this.$api}/post').then ((res) => {
-this.post=this.data
 
-}).catch((e) => {
-    console.error (e)
-}
-)
-
-},
-
+    mounted() {
+        axios.get(`${this.$api}/post`).then((res) => {
+            console.log(res);
+            this.posts = res.data
+        }).catch((e) => {
+            console.error(e)
+        })
+    }
 }
 
 </script>
