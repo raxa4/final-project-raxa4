@@ -13,14 +13,14 @@
                     <h5 class="card-title">
                         <RouterLink :to="`/post/${p.id}`">{{
                             p.title
-                        }}</RouterLink>
+                            }}</RouterLink>
                     </h5>
                     <p class="card-text">{{ p.text }}</p>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Posted: {{ p.datePosted }}</small>
                 </div>
-                 <button v-if="hasMore"
+                <button v-if="hasMore"
                         @click="updateOffset"
                         :disabled="loading"
                         class="btn btn-primary mt-4 mx-auto">
@@ -46,10 +46,10 @@ export default {
     data() {
         return {
             posts: [],
-            offset : 0,
-            limit : 6,
-            loading : false,
-            hasMore : true,
+            offset: 0,
+            limit: 6,
+            loading: false,
+            hasMore: true,
         }
     },
 
@@ -57,7 +57,7 @@ export default {
         axios.get(`${this.$api}/post?offset=${this.offset}&limit=${this.limit}`).then((res) => {
             console.log(res);
             this.posts = res.data.posts
-             this.hasMore = res.data.totalSize > this.offset + this.limit;
+            this.hasMore = res.data.totalSize > this.offset + this.limit;
         }).catch((e) => {
             console.error(e)
         })
