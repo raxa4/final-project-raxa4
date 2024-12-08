@@ -23,9 +23,21 @@ app.get('/json', (req, res) => {
 })
 
 app.get('/post', (req, res) => {
-    let post = getAll()
-    res.json(post)
-})
+    try {
+        let offset = req.query.offset ? parseInt(req.query.offset) : 0;
+        let limit = req.query.limit ? parseInt(req.query.limit) : 6;
+        let posts = getAll();
+
+        res.json({
+            posts: posts.slice(offset, offset + limit),
+            totalSize: posts.length
+        });
+
+    } catch (e) {
+        res.status(400).json(e.message);
+    }
+});
+
 
 app.get('/post/:id', (req, res) => {
     try {

@@ -6,7 +6,7 @@
                 <div class="card-header">Article:</div>
                 <div class="card-body text-dark">
                     <img width="200"
-                         :src="'$api/src/assets/post-images/' + p.picture"
+                         :src="$api + p.picture"
                          class="card-img-top"
                          alt="Post image">
 
@@ -20,6 +20,12 @@
                 <div class="card-footer">
                     <small class="text-muted">Posted: {{ p.datePosted }}</small>
                 </div>
+                 <button v-if="hasMore"
+                        @click="updateOffset"
+                        :disabled="loading"
+                        class="btn btn-primary mt-4 mx-auto">
+                    Load more
+                </button>
             </div>
         </div>
     </div>
@@ -39,14 +45,19 @@ export default {
 
     data() {
         return {
-            posts: []
+            posts: [],
+            offset : 0,
+            limit : 6,
+            loading : false,
+            hasMore : true,
         }
     },
 
     mounted() {
-        axios.get(`${this.$api}/post`).then((res) => {
+        axios.get(`${this.$api}/post?offset=${this.offset}&limit=${this.limit}`).then((res) => {
             console.log(res);
-            this.posts = res.data
+            this.posts = res.data.posts
+             this.hasMore = res.data.totalSize > this.offset + this.limit;
         }).catch((e) => {
             console.error(e)
         })
