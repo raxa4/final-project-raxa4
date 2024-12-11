@@ -13,6 +13,24 @@ const routes = [
 
     { path: '/card', component: cardView },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundView },
+
+    {
+        path: '/admin',
+        children: [
+            {
+                path: '',
+                component: () => import('./views/admin/AdminHomeView.vue')
+            }, {
+                path: 'post',
+                component: () => import('./views/admin/AdminPostView.vue'),
+            },
+            {
+                path: 'post/:id',
+                component: () => import('./views/admin/AdminPostView.vue'),
+            }
+        ],
+    },
+
 ]
 
 const router = createRouter({
