@@ -19,14 +19,14 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import('./views/admin/AdminHomeView.vue')
+                component: () => import('../views/admin/AdminHomeView.vue')
             }, {
                 path: 'post',
-                component: () => import('./views/admin/AdminPostView.vue'),
+                component: () => import('../views/admin/AdminPostView.vue'),
             },
             {
                 path: 'post/:id',
-                component: () => import('./views/admin/AdminPostView.vue'),
+                component: () => import('../views/admin/AdminPostView.vue'),
             }
         ],
     },
