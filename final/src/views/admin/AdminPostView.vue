@@ -5,11 +5,12 @@
              :src="$api + post.picture"
              alt="Post image">
 
-        <div class="mb-3">
+ <div class="mb-3">
             <label for="picture">Picture</label>
             <input type="file"
                    class="form-control"
                    id="picture"
+                   @change="onPictureChange"
                    accept="image/png, image/jpeg">
         </div>
 
@@ -43,6 +44,15 @@
                       style="height: 400px;"></textarea>
             <label for="postDescription">Text</label>
         </div>
+        <div class="my-3">
+            <div v-if="loading"
+                 class="spinner-border text-light"
+                 role="status">
+            </div>
+            <button v-else
+                    class="btn btn-primary"
+                    @click="savePost">Save</button>
+        </div>
     </div>
 </template>
 
@@ -57,6 +67,8 @@ export default {
         return {
             post: {},
             datePosted: null,
+             picture: null,
+               loading: false
         }
     },
 
@@ -90,6 +102,34 @@ export default {
             let day = ('00' + d.getDay()).slice(-2);
 
             return `${d.getFullYear()}-${month}-${day}`
+        },
+
+  onPictureChange(e) {
+            let files = e.target.files || e.dataTransfer.files;
+
+            if (!files.length) {
+                return;
+            }
+
+            this.picture = files[0]
+        },
+
+         savePost() {
+            let data = JSON.parse(JSON.stringify(this.post));
+            data.picture = this.picture;
+            this.loading = true;
+
+            axios.post(this.$api + '/post/',
+                data, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            }).then((res) => {
+                console.log(res);
+            }).catch((e) => {
+                console.error(e)
+            }).finally(() => {
+                this.loading = false;
+            })
+
         }
     }
 }
