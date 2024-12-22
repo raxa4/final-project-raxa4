@@ -25,6 +25,8 @@
                              width="100px"></td>
                     <td>{{ post.datePosted }}</td>
                     <td>
+                        <button class="btn btn-danger"
+                                @click="deletePost(post.id)">Delete</button>
                         <RouterLink :to="`/admin/post/${post.id}`">Edit</RouterLink>
                     </td>
                 </tr>

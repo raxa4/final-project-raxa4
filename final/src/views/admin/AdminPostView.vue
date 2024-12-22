@@ -1,7 +1,7 @@
 <template>
     <div class="mt-3">
         <img v-if="post.picture"
-             class="w-100"
+             class="thumbnail"
              :src="$api + post.picture"
              alt="Post image">
 
@@ -50,6 +50,7 @@
                  role="status">
             </div>
             <button v-else
+            :disabled="!isValid"
                     class="btn btn-primary"
                     @click="savePost">Save</button>
         </div>
@@ -78,7 +79,24 @@ export default {
             this.getPost();
         }
     },
+computed: {
+isValid(){
+    if (!this.post.id && !this.picture) {
+                return false;
+            }
 
+            if (!this.post.title || !this.post.text) {
+                return false;
+            }
+
+            if (!this.datePosted) {
+                return false;
+            }
+
+            return true;
+}
+
+},
     methods: {
         getPost() {
             axios.get(this.$api + '/post/' + this.$route.params.id)
@@ -116,14 +134,19 @@ export default {
 
          savePost() {
             let data = JSON.parse(JSON.stringify(this.post));
-            data.picture = this.picture;
+            if (this.picture) {
+                data.picture = this.picture;
+            }
+
+            data.datePosted = new Date(this.datePosted).toUTCString();
             this.loading = true;
 
-            axios.post(this.$api + '/post/',
+            axios.post(this.$api + '/post/' + this.post.id ?? '',
                 data, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then((res) => {
                 console.log(res);
+                this.$router.push('/admin');
             }).catch((e) => {
                 console.error(e)
             }).finally(() => {
@@ -134,3 +157,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.thumbnail {
+    max-height: 200px;
+}
+</style>
