@@ -2,7 +2,7 @@
 *This project is desinged as a simulation of an online store and crated for educational purpose*
 
 
-##FINAL
+## FINAL ##
 The frontend part of the application, built with Vue.js. Displays products, cart, and user interface.
 
 **START**
