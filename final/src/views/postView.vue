@@ -29,18 +29,16 @@ export default {
   },
   methods: {
     getPost() {
-     
-        console.log('getting by id', this.$route.params.id)
-        axios.get(this.$api +'/post' + this.$route.params.id)
-        .than(res =>{
-          this.post=this.data
-        }).catch (err =>{
-     
-        
-        this.$router.push('/not-found')
+      console.log('getting by id', this.$route.params.id)
+      axios.get(this.$api + '/post/' + this.$route.params.id)
+        .then(res => {
+          this.post = res.data
+        }).catch(err => {
+          this.$router.push('/not-found')
+
         })
-      }
-    },
-  }
+    }
+  },
+}
 
 </script>

@@ -20,13 +20,14 @@
                 <div class="card-footer">
                     <small class="text-muted">Posted: {{ p.datePosted }}</small>
                 </div>
-                <button v-if="hasMore"
-                        @click="updateOffset"
-                        :disabled="loading"
-                        class="btn btn-primary mt-4 mx-auto">
-                    Load more
-                </button>
+
             </div>
+            <button v-if="hasMore"
+                    @click="updateOffset"
+                    :disabled="loading"
+                    class="btn btn-primary mt-4 mx-auto">
+                Load more
+            </button>
         </div>
     </div>
 </template>
