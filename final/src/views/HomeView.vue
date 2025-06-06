@@ -1,4 +1,5 @@
 <template>
+    <div class= "container">
     <div class="row row-cols-2 row-cols-md-3 g-1">
         <div v-for="p in posts"
              class="col">
@@ -30,6 +31,7 @@
             </button>
         </div>
     </div>
+</div>
 </template>
 
 

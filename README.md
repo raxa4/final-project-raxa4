@@ -1,5 +1,5 @@
 # FINAL PROJECT RAXA4
-*This project is desinged as a simulation of an online store and crated for educational purpose*
+*This project is desinged as a simulation of an online blog post and crated for educational purpose*
 
 
 ## FINAL ##
@@ -9,9 +9,9 @@ The frontend part of the application, built with Vue.js. Displays products, cart
 
 In a separate terminal
 
-1. cd final
-2. npm install
-3. npm run serve
+1. `cd final` 
+2. `npm install`
+3. `npm run serve`
 
 The app runs at: http://localhost:5173/
 
@@ -24,9 +24,9 @@ The backend part, built with Node.js + Express. Provides data.
 
 In a separate terminal
 
-1. cd final
-2. npm install
-3. npm run serve
+1. `cd final`
+2. `npm install`
+3. `npm run serve`
 
 The app runs at: http://localhost:3000/
 
